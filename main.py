@@ -97,6 +97,11 @@ def render():
     if st.button("Search"):
         searchResults = search_patients(searchFirstName, searchLastName, searchDOB)
 
+        # If no entries, display message and return...
+        if (not "entry" in searchResults):
+            st.markdown("No patients found.")
+            return
+
         # Look at bundle and just take the first result...
         entry = searchResults["entry"][0]
         if (entry == None):
