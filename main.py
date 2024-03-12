@@ -43,9 +43,11 @@ def search_patients(first_name, last_name, dob):
     fhirClient = FHIRClient.for_no_auth(fhirUrl)
 
     # Format inputs...
-    sDob = ""
-    if (dob != None):
-        sDob = dob.strftime("%Y-%m-%d")
+    # TODO: Until date_input allows a blank value, I am just using text for the DOB
+    #sDob = ""
+    #if (dob != None):
+    #    sDob = dob.strftime("%Y-%m-%d")
+    sDob = dob
 
     # Search patients...
     searchResults = fhirClient.search_resource("Patient", {"given": first_name, "family": last_name, "birthdate": sDob})
@@ -93,7 +95,8 @@ def render():
     st.markdown("## Search for Patient")
     searchFirstName = st.text_input("First Name")
     searchLastName = st.text_input("Last Name")
-    searchDOB = st.date_input("Date of Birth", None, min_value=datetime.datetime(1900, 1, 1), max_value=datetime.datetime.now())
+    searchDOB = st.text_input("Date of Birth (YYYY-MM-DD)")
+    #searchDOB = st.date_input("Date of Birth", None, min_value=datetime.datetime(1900, 1, 1), max_value=datetime.datetime.now())
     if st.button("Search"):
         searchResults = search_patients(searchFirstName, searchLastName, searchDOB)
 

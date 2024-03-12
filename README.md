@@ -5,6 +5,4 @@ Diabetes Risk Score for Health Universe
 https://docs.healthuniverse.com/overview/quickstart/15-second-quick-start
 
 ## Run Locally
-`streamlit run main.py`
-
 `python3 -m streamlit run main.py`
